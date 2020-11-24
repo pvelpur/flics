@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -36,11 +37,18 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+//methods (on a specific user instance)
+userSchema.methods.generateAuthToken = async function () {
+    const user = this
+    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET)
+    return token
+}
+
 // Middleware
 // statics are "Model methods", can call using User.<method>
 userSchema.statics.findByCredentials = async (username_or_email, password) => {
     const user = await User.findOne({$or: [{email: username_or_email}, {username: username_or_email}]})
-
+    
     if(!user) {
         throw new Error('Unable to login')
     }
@@ -48,7 +56,7 @@ userSchema.statics.findByCredentials = async (username_or_email, password) => {
     const isMatch = await bcrypt.compare(password, user.password)
 
     if(!isMatch) {
-        throw new Error('Unable to login')
+        throw new Error('Unable to login (Email and Password do not match)')
     }
 
     return user
