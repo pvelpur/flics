@@ -7,8 +7,8 @@
 1. First `git clone` the repository
 
 2. You will to need to create a directory called ***config*** and inside this directory create a file called ***dev.env*** and fill with the following:
-    - PORT: <port_number>
-    - MONGODB_URL: <Connection_URL>
+    - PORT= <port_number>
+    - MONGODB_URL= <Connection_URL>
 
     ###### Note: local MONGODB_URL: mongodb://127.0.0.1:27017/<database_name> 
     - Replace **<database_name>** as appropriate
