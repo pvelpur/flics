@@ -5,12 +5,8 @@ const { signup, login, signout } = require('../controllers/auth')
 const router = express.Router()
 
 router.post('/signup', signup)
-<<<<<<< HEAD
-router.get('/',(req,res)=>{res.send("hello world")})
-=======
 router.post('/login', login)
 router.get('/signout', signout)
 
->>>>>>> master
 module.exports = router
 
