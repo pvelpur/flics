@@ -1,13 +1,12 @@
-const User = require('../models/user')
 const Review = require('../models/review')
 
 
 exports.createReview = async (req, res) => {
-    const review = new Review({...req.body}) 
+    const review = new Review({...req.body, owner: req.userID })
+    
     try{
         await review.save()
-        const username = await User.findById(req.body.user)
-        res.status(201).json({review,username})
+        res.status(201).json({review})
     }catch(e) {
         res.status(400).send(e)
     }
