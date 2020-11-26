@@ -13,7 +13,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         // Creating our own functions for user model
-        const user = await User.findByCredentials(req.body.email_or_pswrd, req.body.password)
+        const user = await User.findByCredentials(req.body.email_or_username, req.body.password)
         const token = await user.generateAuthToken()
 
         res.cookie("t", token, {expire: new Date() + 9999})
