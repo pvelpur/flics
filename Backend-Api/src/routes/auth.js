@@ -10,6 +10,7 @@ router.post('/login', login)
 router.get('/signout', signout)
 
 // Any route containing :userId, the app will first execute getUserById() method
+// localhost:3000/user/userid=23545794
 router.param("userId", getUserById)
 
 module.exports = router
