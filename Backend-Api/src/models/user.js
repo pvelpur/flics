@@ -37,6 +37,13 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
+//Virtual Property -> relationship btwn 2 entities
+userSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 //methods (on a specific user instance)
 userSchema.methods.generateAuthToken = async function () {
     const user = this
