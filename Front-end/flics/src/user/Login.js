@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 
-function Signup() {
+function Login() {
 
-    const [username, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const [email_or_username, setName] = useState('')
     const [password, setPassword] = useState('')
     //const [error, setError] = useState('')
 
@@ -11,9 +10,6 @@ function Signup() {
         
         if(inputName === 'name'){
             setName(event.target.value)
-        }
-        else if(inputName === 'email'){
-            setEmail(event.target.value)
         }
         else {
             setPassword(event.target.value)
@@ -23,12 +19,11 @@ function Signup() {
     const handleSubmit = event => {
         event.preventDefault() //stop default behavior of reloading page
         const user = {
-            username,
-            email,
+            email_or_username,
             password
         }
         //console.log(user)
-        fetch('http://localhost:8080/signup', {
+        fetch('http://localhost:8080/login', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -44,26 +39,16 @@ function Signup() {
 
     return (
         <div className="container">
-            <h2 className="mt-5 mb-5">Signup</h2>
+            <h2 className="mt-5 mb-5">Login</h2>
 
             <form>
                 <div className='form-group'>
-                    <label className="text-muted">Username</label>
+                    <label className="text-muted">Username/Email</label>
                     <input 
                         onChange={handleChange('name')} 
                         type="text" 
                         className="form-control" 
-                        value={username}
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <label className="text-muted">Email</label>
-                    <input 
-                        onChange={handleChange('email')} 
-                        type="email" 
-                        className="form-control" 
-                        value={email}
+                        value={email_or_username}
                         required
                     />
                 </div>
@@ -84,4 +69,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Login
