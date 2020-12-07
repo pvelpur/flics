@@ -9,7 +9,6 @@ const app = express()
 //bring in routes
 const authRouter = require('./routes/auth')
 const reviewRouter = require('./routes/review')
-const groupRouter = require('./routes/group')
 
 //Middleware
 app.use(morgan("dev"))
@@ -19,7 +18,6 @@ app.use(cookieParser())
 
 app.use('/', authRouter)
 app.use('/', reviewRouter)
-app.use('/', groupRouter)
 
 module.exports = app
 
