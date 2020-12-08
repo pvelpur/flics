@@ -6,7 +6,7 @@ exports.signup = async (req, res) => {
         await user.save()
         res.status(201).json({user})
     }catch(e) {
-        res.status(400).send(e)
+        res.status(400).json({error: e.message})
     }
 }
 
@@ -21,8 +21,7 @@ exports.login = async (req, res) => {
         const {_id, username, email} = user
         res.json({token, user: {_id, username, email}})
     } catch (e) {
-        console.log('Error')
-        res.status(400).send()
+        res.status(400).json({error: e.message})
     }
 }
 

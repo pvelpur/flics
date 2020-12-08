@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom';
 
 function Signup() {
 
@@ -46,7 +47,7 @@ function Signup() {
         <div className="container">
             <h2 className="mt-5 mb-5">Signup</h2>
 
-            <form>
+            <form onClick={handleSubmit}>
                 <div className='form-group'>
                     <label className="text-muted">Username</label>
                     <input 
@@ -77,8 +78,10 @@ function Signup() {
                         required
                     />
                 </div>
-                <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
+                <button type="submit" className="btn btn-raised btn-primary">Submit</button>
+                <p>Already have an Account? </p><Link to="/login">Login</Link>
             </form>
+            
 
         </div>
     )

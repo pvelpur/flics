@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom';
 
 function Login() {
 
@@ -63,6 +64,9 @@ function Login() {
                     />
                 </div>
                 <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
+                <br/>
+                <br/>
+                <Link to="/signup">Register Now</Link>
             </form>
 
         </div>
