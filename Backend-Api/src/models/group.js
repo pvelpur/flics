@@ -7,6 +7,12 @@ const groupSchema = new mongoose.Schema({
             ref: 'User'
         }
     }],
+    admins: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     reviews: [{
         review: {
             type: mongoose.Schema.Types.ObjectId,
@@ -29,6 +35,10 @@ const groupSchema = new mongoose.Schema({
 
 groupSchema.methods.appendUser = function (username) {
     this.usernames.push(username)
+}
+
+groupSchema.methods.appendAdmin = function (username) {
+    this.admins.push(username)
 }
 
 const Group = mongoose.model('Group', groupSchema)
