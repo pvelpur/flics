@@ -1,15 +1,17 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom';
 
 function Login() {
 
-    const [email_or_username, setName] = useState('')
+    const [email_or_username, setEorUN] = useState('')
     const [password, setPassword] = useState('')
-    //const [error, setError] = useState('')
+    const [error, setError] = useState('')
+    //const [redirectUser, setRedirect] = useState(false)
 
     const handleChange = inputName => event => {
-        
+        setError("")
         if(inputName === 'name'){
-            setName(event.target.value)
+            setEorUN(event.target.value)
         }
         else {
             setPassword(event.target.value)
@@ -23,7 +25,20 @@ function Login() {
             password
         }
         //console.log(user)
-        fetch('http://localhost:8080/login', {
+        login(user)
+        .then(data => {
+            if(data.error) {
+                setError(data.error)
+            }
+            else {
+                //authenticate
+                //redirect
+            }
+        })
+    }
+
+    const login = user => {
+        return fetch('http://localhost:8080/login', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -35,15 +50,23 @@ function Login() {
             return response.json()
         })
         .catch(err => console.log(err))
-    }
+    } 
 
     return (
         <div className="container">
-            <h2 className="mt-5 mb-5">Login</h2>
+            <h2 className="mt-5 mb-5">Signin</h2>
 
-            <form>
+            {/* If error while signing in User */}
+            <div 
+                className={"alert alert-danger"} 
+                style={{display: error ? "" : "none"}}
+            >
+                {error}
+            </div>
+
+            <form onSubmit={handleSubmit}>
                 <div className='form-group'>
-                    <label className="text-muted">Username/Email</label>
+                    <label className="text-muted">Username or Email</label>
                     <input 
                         onChange={handleChange('name')} 
                         type="text" 
@@ -62,8 +85,11 @@ function Login() {
                         required
                     />
                 </div>
-                <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
+                <input type="submit"></input>
+                <br /><br />
+                <Link to="/signup">Register Now</Link>
             </form>
+            
 
         </div>
     )
