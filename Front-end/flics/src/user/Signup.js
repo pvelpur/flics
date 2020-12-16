@@ -5,6 +5,7 @@ function Signup() {
     const [username, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [favMovie, setFavMovie] = useState('')
     //const [error, setError] = useState('')
 
     const handleChange = inputName => event => {
@@ -14,6 +15,9 @@ function Signup() {
         }
         else if(inputName === 'email'){
             setEmail(event.target.value)
+        }
+        else if(inputName === 'favMovie'){
+            setFavMovie(event.target.value)
         }
         else {
             setPassword(event.target.value)
@@ -25,7 +29,8 @@ function Signup() {
         const user = {
             username,
             email,
-            password
+            password,
+            favMovie
         }
         //console.log(user)
         fetch('http://localhost:8080/signup', {
@@ -74,6 +79,16 @@ function Signup() {
                         type="password" 
                         className="form-control" 
                         value={password}
+                        required
+                    />
+                </div>
+                <div className='form-group'>
+                    <label className="text-muted">Favorite Movie</label>
+                    <input 
+                        onChange={handleChange('favMovie')} 
+                        type="text" 
+                        className="form-control" 
+                        value={favMovie}
                         required
                     />
                 </div>

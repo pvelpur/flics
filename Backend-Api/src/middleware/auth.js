@@ -11,6 +11,7 @@ const RequireAuth = async (req, res, next) => {
         const token = req.header('Authorization').replace('Bearer ', '')
         // token -> userid and jwt_secret
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        console.log("I know nothing and never will")
         const user = await User.findOne({ _id: decoded._id})
 
         if(!user) {
