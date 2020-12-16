@@ -104,8 +104,9 @@ function Signup() {
                         required
                     />
                 </div>
-                <input type="submit"></input>
-                <p>Already have an Account? </p><Link to="/login">Login</Link>
+                <input type="submit" className="btn-primary"></input>
+                <br/>
+                <span>Already have an Account?</span> <Link to="/login">Login</Link>
             </form>
             
 

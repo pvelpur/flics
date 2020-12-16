@@ -1,12 +1,16 @@
 import React, { useState } from "react"
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import {login as loginAction} from '../actions'
 
 function Login() {
 
+    const dispatch = useDispatch()
     const [email_or_username, setEorUN] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    //const [redirectUser, setRedirect] = useState(false)
+    const [redirectUser, setRedirect] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleChange = inputName => event => {
         setError("")
@@ -20,6 +24,7 @@ function Login() {
 
     const handleSubmit = event => {
         event.preventDefault() //stop default behavior of reloading page
+        setLoading(true)
         const user = {
             email_or_username,
             password
@@ -28,11 +33,14 @@ function Login() {
         login(user)
         .then(data => {
             if(data.error) {
+                setLoading(false)
                 setError(data.error)
             }
             else {
+                // If login in successful
                 //authenticate
-                //redirect
+                dispatch(loginAction(data.user, data.token))
+                setRedirect(true)
             }
         })
     }
@@ -64,6 +72,17 @@ function Login() {
                 {error}
             </div>
 
+            {redirectUser ? <Redirect to="/" />: ""}
+
+            {loading ?
+                <div className="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div> 
+                </div>
+                : ""
+            }
+
             <form onSubmit={handleSubmit}>
                 <div className='form-group'>
                     <label className="text-muted">Username or Email</label>
@@ -85,7 +104,7 @@ function Login() {
                         required
                     />
                 </div>
-                <input type="submit"></input>
+                <input type="submit" className="btn-primary"></input>
                 <br /><br />
                 <Link to="/signup">Register Now</Link>
             </form>
