@@ -6,6 +6,7 @@ function Signup() {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [favMovie, setFavMovie] = useState('')
     const [error, setError] = useState('')
     const [success, setSuccess] = useState(false)
 
@@ -18,6 +19,9 @@ function Signup() {
         else if(inputName === 'email'){
             setEmail(event.target.value)
         }
+        else if(inputName === 'favMovie'){
+            setFavMovie(event.target.value)
+        }
         else {
             setPassword(event.target.value)
         }
@@ -28,7 +32,8 @@ function Signup() {
         const user = {
             username,
             email,
-            password
+            password,
+            favMovie
         }
         //console.log(user)
         signup(user)
@@ -104,9 +109,23 @@ function Signup() {
                         required
                     />
                 </div>
+<<<<<<< HEAD
+                <div className='form-group'>
+                    <label className="text-muted">Favorite Movie</label>
+                    <input 
+                        onChange={handleChange('favMovie')} 
+                        type="text" 
+                        className="form-control" 
+                        value={favMovie}
+                        required
+                    />
+                </div>
+                <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
+=======
                 <input type="submit" className="btn-primary"></input>
                 <br/>
                 <span>Already have an Account?</span> <Link to="/login">Login</Link>
+>>>>>>> master
             </form>
             
 

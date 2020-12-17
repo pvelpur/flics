@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: 7
     },
+    favMovie: {
+        type: String
+    },
+    favorites: [{type: String}]
 }, {
     timestamps: true
 })
@@ -53,6 +57,7 @@ userSchema.methods.generateAuthToken = async function () {
 
 // Middleware
 // statics are "Model methods", can call using User.<method>
+
 userSchema.statics.findByCredentials = async (username_or_email, password) => {
     const user = await User.findOne({$or: [{email: username_or_email}, {username: username_or_email}]})
     
