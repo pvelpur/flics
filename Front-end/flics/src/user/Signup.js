@@ -1,17 +1,20 @@
 import React, { useState } from "react"
+import { Link } from 'react-router-dom';
 
 function Signup() {
 
-    const [username, setName] = useState('')
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [favMovie, setFavMovie] = useState('')
-    //const [error, setError] = useState('')
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState(false)
 
     const handleChange = inputName => event => {
-        
+        setError("")
+        setSuccess(false)
         if(inputName === 'name'){
-            setName(event.target.value)
+            setUsername(event.target.value)
         }
         else if(inputName === 'email'){
             setEmail(event.target.value)
@@ -33,7 +36,23 @@ function Signup() {
             favMovie
         }
         //console.log(user)
-        fetch('http://localhost:8080/signup', {
+        signup(user)
+        .then(data => {
+            if(data.error) {
+                setError(data.error)
+            }
+            else {
+                setUsername("")
+                setPassword("")
+                setError(data.message)
+                setEmail("")
+                setSuccess(true)
+            }
+        })
+    }
+
+    const signup = user => {
+        return fetch('http://localhost:8080/signup', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -45,13 +64,21 @@ function Signup() {
             return response.json()
         })
         .catch(err => console.log(err))
-    }
+    } 
 
     return (
         <div className="container">
             <h2 className="mt-5 mb-5">Signup</h2>
 
-            <form>
+            {/* If error while creating User */}
+            <div 
+                className={success ? "alert alert-primary" : "alert alert-danger"} 
+                style={{display: error ? "" : "none"}}
+            >
+                {error}
+            </div>
+
+            <form onSubmit={handleSubmit}>
                 <div className='form-group'>
                     <label className="text-muted">Username</label>
                     <input 
@@ -82,6 +109,7 @@ function Signup() {
                         required
                     />
                 </div>
+<<<<<<< HEAD
                 <div className='form-group'>
                     <label className="text-muted">Favorite Movie</label>
                     <input 
@@ -93,7 +121,13 @@ function Signup() {
                     />
                 </div>
                 <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
+=======
+                <input type="submit" className="btn-primary"></input>
+                <br/>
+                <span>Already have an Account?</span> <Link to="/login">Login</Link>
+>>>>>>> master
             </form>
+            
 
         </div>
     )
