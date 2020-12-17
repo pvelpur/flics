@@ -109,7 +109,6 @@ function Signup() {
                         required
                     />
                 </div>
-<<<<<<< HEAD
                 <div className='form-group'>
                     <label className="text-muted">Favorite Movie</label>
                     <input 
@@ -120,12 +119,9 @@ function Signup() {
                         required
                     />
                 </div>
-                <button onClick={handleSubmit} className="btn btn-raised btn-primary">Submit</button>
-=======
                 <input type="submit" className="btn-primary"></input>
                 <br/>
                 <span>Already have an Account?</span> <Link to="/login">Login</Link>
->>>>>>> master
             </form>
             
 
