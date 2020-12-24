@@ -1,10 +1,14 @@
 import MainRouter from './MainRouter'
 import {BrowserRouter as Router} from 'react-router-dom'
+import { persistor } from './store/store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const App = () => {
   return (
     <Router>
-      <MainRouter />
+      <PersistGate persistor={persistor}>
+        <MainRouter />
+      </PersistGate>
     </Router>
   );
 }

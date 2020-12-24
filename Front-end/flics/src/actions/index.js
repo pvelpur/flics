@@ -7,3 +7,9 @@ export const login = (user, authToken) => {
         }
     }
 }
+
+export const signout = () => {
+    return {
+        type: 'SIGNOUT'
+    }
+}

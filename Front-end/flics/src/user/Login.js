@@ -43,6 +43,7 @@ function Login() {
                 setRedirect(true)
             }
         })
+        .catch(err => console.log("Database error bruh", err))
     }
 
     const login = user => {
