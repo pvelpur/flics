@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
 
         res.cookie("t", token, {expire: new Date() + 9999})
         
-        const {_id, username, email, } = user
+        const {_id, username, email, favorites} = user
         res.json({token, user: {_id, username, email,}})
     } catch (e) {
         res.status(400).json({error: e.message})
