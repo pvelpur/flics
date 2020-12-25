@@ -62,55 +62,61 @@ function Login() {
     } 
 
     return (
-        <div className="container">
-            <h2 className="mt-5 mb-5">Signin</h2>
-
-            {/* If error while signing in User */}
-            <div 
-                className={"alert alert-danger"} 
-                style={{display: error ? "" : "none"}}
-            >
-                {error}
+        <div>
+            <div class="jumbotron">
+                <h2>Flics</h2>
+                <p class='lead'>Welcome to Flics!</p>
             </div>
+            <div className="container">
+                <h2 className="mt-5 mb-5">Signin</h2>
 
-            {redirectUser ? <Redirect to="/" />: ""}
-
-            {loading ?
-                <div className="text-center">
-                    <div className="spinner-border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </div> 
+                {/* If error while signing in User */}
+                <div 
+                    className={"alert alert-danger"} 
+                    style={{display: error ? "" : "none"}}
+                >
+                    {error}
                 </div>
-                : ""
-            }
 
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <label className="text-muted">Username or Email</label>
-                    <input 
-                        onChange={handleChange('name')} 
-                        type="text" 
-                        className="form-control" 
-                        value={email_or_username}
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <label className="text-muted">Password</label>
-                    <input 
-                        onChange={handleChange('password')} 
-                        type="password" 
-                        className="form-control" 
-                        value={password}
-                        required
-                    />
-                </div>
-                <input type="submit" className="btn-primary"></input>
-                <br /><br />
-                <Link to="/signup">Register Now</Link>
-            </form>
-            
+                {redirectUser ? <Redirect to="/" />: ""}
 
+                {loading ?
+                    <div className="text-center">
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div> 
+                    </div>
+                    : ""
+                }
+
+                <form onSubmit={handleSubmit}>
+                    <div className='form-group'>
+                        <label className="text-muted">Username or Email</label>
+                        <input 
+                            onChange={handleChange('name')} 
+                            type="text" 
+                            className="form-control" 
+                            value={email_or_username}
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label className="text-muted">Password</label>
+                        <input 
+                            onChange={handleChange('password')} 
+                            type="password" 
+                            className="form-control" 
+                            value={password}
+                            required
+                        />
+                    </div>
+                    <input type="submit" className="btn-primary"></input>
+                    <br /><br />
+                    <Link to="/signup">Register Now</Link>
+                </form>
+                
+
+            </div>
         </div>
     )
 }
