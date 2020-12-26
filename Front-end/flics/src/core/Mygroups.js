@@ -9,7 +9,8 @@ function Mygroups(){
     
     const groups = [{id:"1",name:"Silicon Valley Boys",description:"Bitchesss"},{id:"2",name:"JPMC Sucks",description:"Rohan B sucks"}]
     const items = groups.map((item) =>
-        <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center"> {item.name}
+        <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center"> 
+        <a href={`group/${item.id}`}> {item.name} </a>
         <p>
             {item.description}
         </p>
