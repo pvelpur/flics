@@ -10,6 +10,7 @@ function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
     const [activeToggle,setActiveToggle] = useState('Mygroups')
+    
     const signout = (next) => {
         dispatch(signoutAction())
         next() //redirect the user
