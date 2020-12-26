@@ -48,6 +48,12 @@ userSchema.virtual('reviews', {
     foreignField: 'owner'
 })
 
+userSchema.virtual('groups', {
+    ref: 'Group',
+    localField: '_id',
+    foreignField: 'usernames'
+})
+
 //methods (on a specific user instance)
 userSchema.methods.generateAuthToken = async function () {
     const user = this
