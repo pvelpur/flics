@@ -17,10 +17,12 @@ const groupSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
+        required: true
     },
     description: {
         type: String,
-        trim: true
+        trim: true,
+        required: true
     }
     // owner: {
     //     type: mongoose.Schema.Types.ObjectId,
