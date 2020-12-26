@@ -63,9 +63,9 @@ function Login() {
 
     return (
         <div>
-            <div class="jumbotron">
+            <div className="jumbotron">
                 <h2>Flics</h2>
-                <p class='lead'>Welcome to Flics!</p>
+                <p className='lead'>Welcome to Flics!</p>
             </div>
             <div className="container">
                 <h2 className="mt-5 mb-5">Signin</h2>
