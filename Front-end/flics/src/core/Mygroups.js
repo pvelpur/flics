@@ -1,37 +1,35 @@
-import React, { useState } from "react"
-import {useSelector} from 'react-redux'
+import React, { useState, useEffect } from "react"
+import {useSelector, useDispatch} from 'react-redux'
+import {loadGroups} from '../reducers/groupReducer'
+import {addGroup} from '../actions'
 
 function Mygroups(){
     const [groupname,setGroupName] = useState('')
     const [description,setDescription] = useState('')
     const authToken = useSelector(state => state.auth.authToken)
+    const groups = useSelector(state => state.groups)
     const [successModal,setSuccess] = useState(false)
+    const [loading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
     
-    const groups = [{id:"1",name:"Silicon Valley Boys",description:"Bitchesss"},{id:"2",name:"JPMC Sucks",description:"Rohan B sucks"}]
+    //const groups = [{id:"1",name:"Silicon Valley Boys",description:"We make the dough"},{id:"2",name:"Anime Enthusiasts",description:"For people who want good anime recommendations"}]
     const items = groups.map((item) =>
-        <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center"> 
-        <a href={`group/${item.id}`}> {item.name} </a>
-        <p>
-            {item.description}
-        </p>
+        <li key={item._id} className="list-group-item justify-content-between">
+            <div className="card-body">
+                <h5 className="card-title"><a href={`group/${item._id}`}> {item.name} </a></h5>
+                {item.description}
+            </div>
         </li>
     )
-    // const [groups, setGroups] = useState([])
 
-    // useEffect(()=>{
-    //     const fetchData = async()=>{            
-    //         const response = await fetch('http://localhost:8080/groups', {
-    //         method: "GET",
-    //         headers: {
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json",
-    //             Authorization: "Bearer " + authToken
-    //         },
-    //     })
-    //     setGroups(response.json())
-    //     }
-    //     fetchData()       
-    // },[])
+    useEffect(()=>{    
+        const getGroups = async () => {
+            setIsLoading(true)
+            await dispatch(loadGroups())
+            setIsLoading(false)
+        };
+        getGroups()
+    }, [dispatch])
 
     const handleChange = inputName => event => {
         setSuccess(false)
@@ -55,6 +53,13 @@ function Mygroups(){
                 console.log("Database error")
             }
             else{
+                const group = {
+                        name: data.group.name, 
+                        description: data.group.description, 
+                        usernames: data.group.usernames, 
+                        _id: data.group._id
+                    }
+                dispatch(addGroup(group))
                 setSuccess(true)
             }
         })
@@ -72,18 +77,23 @@ function Mygroups(){
             },
             body: JSON.stringify(groupinfo)
         })
-        .then(response => {
-            return response.json()
+        .then((res) => {
+            return res.json()
         })
         .catch(err => console.log(err))
     } 
 
+    if(loading) {
+        return (<div>Loading...</div>)
+    }
 
     return (
         <div className='container'>
-            <ul className="list-group">
-            {items}
-            </ul>
+            <div className="card" style={{marginBottom: "50px"}}>
+                <ul className="list-group">
+                    {items}  
+                </ul>
+            </div>
             {/* Create group modal */}
             <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" href="#creategroup">
                 Create Group
