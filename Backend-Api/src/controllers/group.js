@@ -18,6 +18,6 @@ exports.createGroup = async (req, res) => {
 exports.getGroups = async(req,res) => {
     //const groups = await Group.find()
     const user = await User.findById(req.userID) //get the user
-    await user.populate({path: 'groups', select: 'name'}).execPopulate()
+    await user.populate({path: 'groups', select: ['name', 'description']}).execPopulate()
     return res.json(user.groups)
 } 
