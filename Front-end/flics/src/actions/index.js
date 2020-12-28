@@ -13,3 +13,28 @@ export const signout = () => {
         type: 'SIGNOUT'
     }
 }
+
+export const setGroups = (groups) => {
+    return {
+        type: 'SET_GROUPS',
+        payload: groups
+    }
+}
+export const addGroup = (group) => {
+    return {
+        type: 'ADD_GROUP',
+        payload: group
+    }
+}
+export const clearGroups = () => {
+    return {
+        type: 'CLEAR_GROUPS',
+    }
+}
+
+export const setMedia = (favorites) => {
+    return {
+        type: 'SET_MEDIA',
+        payload: favorites
+    }
+}

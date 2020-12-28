@@ -3,8 +3,6 @@ const User = require('../models/user')
 exports.signup = async (req, res) => {
     const user = new User(req.body)
     user.favorites.push(user.favMovie)
-    console.log(user.favorites)
-    
     try{
         
         await user.save()
@@ -24,7 +22,7 @@ exports.login = async (req, res) => {
         res.cookie("t", token, {expire: new Date() + 9999})
         
         const {_id, username, email, favorites} = user
-        res.json({token, user: {_id, username, email,}})
+        res.json({token, user: {_id, username, email, favorites}})
     } catch (e) {
         res.status(400).json({error: e.message})
     }

@@ -67,64 +67,71 @@ function Signup() {
     } 
 
     return (
-        <div className="container">
-            <h2 className="mt-5 mb-5">Signup</h2>
-
-            {/* If error while creating User */}
-            <div 
-                className={success ? "alert alert-primary" : "alert alert-danger"} 
-                style={{display: error ? "" : "none"}}
-            >
-                {error}
+        <div>
+            <div className="jumbotron">
+                <h2>Flics</h2>
+                <p className='lead'>Welcome to Flics!</p>
             </div>
+        
+            <div className="container">
+                <h2 className="mt-5 mb-5">Signup</h2>
 
-            <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                    <label className="text-muted">Username</label>
-                    <input 
-                        onChange={handleChange('name')} 
-                        type="text" 
-                        className="form-control" 
-                        value={username}
-                        required
-                    />
+                {/* If error while creating User */}
+                <div 
+                    className={success ? "alert alert-primary" : "alert alert-danger"} 
+                    style={{display: error ? "" : "none"}}
+                >
+                    {error}
                 </div>
-                <div className='form-group'>
-                    <label className="text-muted">Email</label>
-                    <input 
-                        onChange={handleChange('email')} 
-                        type="email" 
-                        className="form-control" 
-                        value={email}
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <label className="text-muted">Password</label>
-                    <input 
-                        onChange={handleChange('password')} 
-                        type="password" 
-                        className="form-control" 
-                        value={password}
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <label className="text-muted">Favorite Movie</label>
-                    <input 
-                        onChange={handleChange('favMovie')} 
-                        type="text" 
-                        className="form-control" 
-                        value={favMovie}
-                        required
-                    />
-                </div>
-                <input type="submit" className="btn-primary"></input>
-                <br/>
-                <span>Already have an Account?</span> <Link to="/login">Login</Link>
-            </form>
-            
 
+                <form onSubmit={handleSubmit}>
+                    <div className='form-group'>
+                        <label className="text-muted">Username</label>
+                        <input 
+                            onChange={handleChange('name')} 
+                            type="text" 
+                            className="form-control" 
+                            value={username}
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label className="text-muted">Email</label>
+                        <input 
+                            onChange={handleChange('email')} 
+                            type="email" 
+                            className="form-control" 
+                            value={email}
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label className="text-muted">Password</label>
+                        <input 
+                            onChange={handleChange('password')} 
+                            type="password" 
+                            className="form-control" 
+                            value={password}
+                            required
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label className="text-muted">Favorite Movie</label>
+                        <input 
+                            onChange={handleChange('favMovie')} 
+                            type="text" 
+                            className="form-control" 
+                            value={favMovie}
+                            required
+                        />
+                    </div>
+                    <input type="submit" className="btn-primary"></input>
+                    <br/>
+                    <span>Already have an Account?</span> <Link to="/login">Login</Link>
+                </form>
+                
+
+            </div>
         </div>
     )
 }

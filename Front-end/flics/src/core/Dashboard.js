@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import {signout as signoutAction} from '../actions'
+import {signout as signoutAction, clearGroups} from '../actions'
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
 import Mygroups from './Mygroups'
 import Mylist from './Mylist'
 import Profile from './Profile'
+
 function Dashboard() {
     const dispatch = useDispatch()
     const history = useHistory()
     const [activeToggle,setActiveToggle] = useState('Mygroups')
+    
     const signout = (next) => {
         dispatch(signoutAction())
+        dispatch(clearGroups())
         next() //redirect the user
         return fetch("http://localhost:8080/signout", {
             method: "GET"
