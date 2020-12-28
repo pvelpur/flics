@@ -1,5 +1,5 @@
 const express = require('express'); 
-const {createGroup, getGroups} = require('../controllers/group');
+const {createGroup, getGroups, changeGroup} = require('../controllers/group');
 const { RequireAuth } = require('../middleware/auth')
 const { getUserById } = require('../controllers/user');
 
@@ -15,9 +15,7 @@ router.post('/group', RequireAuth, createGroup) //need to be authenticated to cr
 router.get('/groups', RequireAuth, getGroups) //need to be authenticated to see reviews
 
 //used when adding a user/admin to the group db
-router.update('/groups', RequireAuth, changeGroup) 
-//used when deleting a user/admin to the group db
-router.delete('/groups', RequireAuth, deleteGroup)
+router.put('/groups/:id', RequireAuth, changeGroup) 
 
 // Any route containing :userId, the app will first execute getUserById() method
 router.param("userId", getUserById )
