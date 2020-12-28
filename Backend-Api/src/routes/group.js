@@ -14,7 +14,12 @@ router.post('/group', RequireAuth, createGroup) //need to be authenticated to cr
 //When it performs authentications, it will add userID to 'req' (check middleware/auth.js)
 router.get('/groups', RequireAuth, getGroups) //need to be authenticated to see reviews
 
+//used when adding a user/admin to the group db
+router.update('/groups', RequireAuth, changeGroup) 
+//used when deleting a user/admin to the group db
+router.delete('/groups', RequireAuth, deleteGroup)
+
 // Any route containing :userId, the app will first execute getUserById() method
-router.param("userId", getUserById)
+router.param("userId", getUserById )
 
 module.exports = router
