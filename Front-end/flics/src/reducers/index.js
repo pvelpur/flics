@@ -1,4 +1,5 @@
 import authReducer from './isLogged'
+import {groupReducer} from '../reducers/groupReducer'
 import {combineReducers} from 'redux'
 import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -11,7 +12,8 @@ const persistConfig = {
   }
 
 const allReducers = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    groups: groupReducer
 })
 
 export default persistReducer(persistConfig, allReducers)
