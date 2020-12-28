@@ -31,3 +31,10 @@ export const clearGroups = () => {
         type: 'CLEAR_GROUPS',
     }
 }
+
+export const setMedia = (favorites) => {
+    return {
+        type: 'SET_MEDIA',
+        payload: favorites
+    }
+}

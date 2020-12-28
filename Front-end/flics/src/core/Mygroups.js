@@ -7,7 +7,7 @@ function Mygroups(){
     const [groupname,setGroupName] = useState('')
     const [description,setDescription] = useState('')
     const authToken = useSelector(state => state.auth.authToken)
-    const groups = useSelector(state => state.groups)
+    const groups = useSelector(state => state.groups) || []
     const [successModal,setSuccess] = useState(false)
     const [loading, setIsLoading] = useState(false)
     const dispatch = useDispatch()

@@ -3,8 +3,6 @@ const User = require('../models/user')
 exports.signup = async (req, res) => {
     const user = new User(req.body)
     user.favorites.push(user.favMovie)
-    console.log(user.favorites)
-    
     try{
         
         await user.save()
