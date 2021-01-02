@@ -4,6 +4,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import Signup from './user/Signup';
 import Login from './user/Login'
 import { useSelector } from 'react-redux';
+import GroupDetail from './core/GroupDetail'
 
 function MainRouter() {
     const auth = useSelector(state => state.auth)
@@ -35,6 +36,8 @@ function MainRouter() {
                     :
                     <Login />
                 )} />
+                <Route path="/group/:id" children={<GroupDetail />}/>
+                
                 
             </Switch>
         </div>
