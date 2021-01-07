@@ -2,6 +2,7 @@ import React, { useState} from "react"
 import { useParams } from 'react-router-dom';
 import {useSelector} from 'react-redux'
 
+
 function GroupDetail(){
     const {id} = useParams();
     const [title,setTitle] = useState('')
@@ -22,11 +23,30 @@ function GroupDetail(){
         author: "swagmoney1011"
     }]
 
+    const addToList = addition => {
+        const parameterinfo = {
+            addition:addition,
+        }
+        return fetch('http://localhost:8080/updateList', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + authToken
+            },
+            body: JSON.stringify(parameterinfo)
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .catch(err => console.log(err))
+    }
+
     const items = reviews.map((item) =>
 
         <div class="card" style={{marginBottom:"50px"}}>
             <h5 class="card-header">{ item.title }
-                <button class="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
+                <button onClick={() => addToList(item.title)} class="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
                 <span style={{float:"right"}}>
                     { item.rating } / 10
                 </span>
@@ -42,8 +62,8 @@ function GroupDetail(){
             </div>
         </div>
     )
-        
 
+    
     const handleChange = inputName => event => {
         setSuccess(false)
         if(inputName === 'title'){
