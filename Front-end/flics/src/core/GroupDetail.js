@@ -1,15 +1,22 @@
-import React, { useState} from "react"
+import React, { useState, useEffect} from "react"
 import { useParams } from 'react-router-dom';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import { setReviews } from "../reducers/reviewReducer";
+import { addReview, clearReviews } from '../actions'
+import { Link } from 'react-router-dom';
 
 function GroupDetail(){
-    const {id} = useParams();
+    const {Groupid} = useParams();
     const [title,setTitle] = useState('')
     const [description,setDescription] = useState('')
     const [rating,setRating] = useState(1)
+    const [loading, setIsLoading] = useState(false)
     const [successModal,setSuccess] = useState(false)
     const authToken = useSelector(state => state.auth.authToken)
-    const reviews = [{
+    const reviews = useSelector(state => state.reviews)
+    const dispatch = useDispatch()
+
+    /*const reviews = [{
         title:"game of thrones",
         description : "it sucks",
         rating : 2,
@@ -20,28 +27,40 @@ function GroupDetail(){
         description : "its soo good",
         rating : 9,
         author: "swagmoney1011"
-    }]
+    }]*/
 
-    const items = reviews.map((item) =>
+    useEffect(()=>{    
+        const getReviews = async () => {
+            setIsLoading(true)
+            await dispatch(setReviews(Groupid))
+            setIsLoading(false)
+        };
+        getReviews()
+        return () => {
+            dispatch(clearReviews())
+        }
+    }, [dispatch, Groupid])
 
-        <div class="card" style={{marginBottom:"50px"}}>
-            <h5 class="card-header">{ item.title }
-                <button class="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
+    const items = reviews ? reviews.map((item) =>
+
+        <div key={item._id} className="card" style={{marginBottom:"50px"}}>
+            <h5 className="card-header">{ item.title }
+                <button className="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
                 <span style={{float:"right"}}>
                     { item.rating } / 10
                 </span>
             </h5>
-            <div class="card-body">
-                <p class="card-text">{ item.description }</p>
+            <div className="card-body">
+                <p className="card-text">{ item.description }</p>
             </div>
-            <div class="card-footer text-muted">
-                { item.author }
+            <div className="card-footer text-muted">
+                { item.owner }
                 {/* <span style="float:right;">  
                 {{ review.date_posted|date:"F d, Y" }}
                 </span> */}
             </div>
         </div>
-    )
+    ) : [];
         
 
     const handleChange = inputName => event => {
@@ -63,6 +82,7 @@ function GroupDetail(){
             title:title,
             description:description,
             rating:rating,
+            group: Groupid
         }
         createReview(reviewinfo)
         .then(data => {
@@ -72,6 +92,7 @@ function GroupDetail(){
             else{
                 console.log("Success")
                 setSuccess(true)
+                dispatch(addReview(data))
             }
         })
         .catch(err => console.log("Database error", err))
@@ -95,11 +116,16 @@ function GroupDetail(){
 
     return (
         <div className='container'>
-            <h3>{id}</h3>
+            <h3>{Groupid}</h3>
             {/* Create review modal */}
+            <Link to="/">Go Back</Link>
             <button type="button" className="btn btn-primary btn-lg btn-block" data-toggle="modal" href="#createreview">
                 Create Review
             </button>
+            {loading ?
+                <div>Loading...</div>
+                : ""
+            }
             <div style={{marginBottom: "50px"}}>
                 <ul className="list-group">
                     {items}  
