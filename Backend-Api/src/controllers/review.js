@@ -12,7 +12,7 @@ exports.createReview = async (req, res) => {
     }
 }
 
-exports.getReviews = async(req,res) => {
-    const reviews = await Review.find()
-    return res.json({reviews})
-}
+// exports.getReviews = async(req,res) => {
+//     const reviews = await Review.find()
+//     return res.json({reviews})
+// }

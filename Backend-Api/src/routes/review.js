@@ -1,7 +1,8 @@
 const express = require('express'); 
-const {createReview, getReviews} = require('../controllers/review');
+const {createReview} = require('../controllers/review');
 const { RequireAuth } = require('../middleware/auth')
 const { getUserById } = require('../controllers/user');
+const {getReviews} = require('../controllers/group')
 
 
 // use express router
@@ -12,7 +13,8 @@ const router = express.Router()
 //DELTE -> DELETE
 router.post('/review', RequireAuth, createReview) //need to be authenticated to create a review
 //When it performs authentications, it will add userID to 'req' (check middleware/auth.js)
-router.get('/reviews', RequireAuth, getReviews) //need to be authenticated to see reviews
+//router.get('/reviews', RequireAuth, getReviews) //need to be authenticated to see reviews
+router.get('/reviews/:groupId', RequireAuth, getReviews) //groupID is a param
 
 // Any route containing :userId, the app will first execute getUserById() method
 router.param("userId", getUserById)

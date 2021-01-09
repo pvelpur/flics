@@ -19,6 +19,11 @@ const reviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
+    },
+    group: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Group",
+        required: true
     }
 
 

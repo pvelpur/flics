@@ -7,20 +7,20 @@ function Mygroups(){
     const [groupname,setGroupName] = useState('')
     const [description,setDescription] = useState('')
     const authToken = useSelector(state => state.auth.authToken)
-    const groups = useSelector(state => state.groups) || []
+    const groups = useSelector(state => state.groups)
     const [successModal,setSuccess] = useState(false)
     const [loading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
     
     //const groups = [{id:"1",name:"Silicon Valley Boys",description:"We make the dough"},{id:"2",name:"Anime Enthusiasts",description:"For people who want good anime recommendations"}]
-    const items = groups.map((item) =>
+    const items = !groups.error ? groups.map((item) =>
         <li key={item._id} className="list-group-item justify-content-between">
             <div className="card-body">
                 <h5 className="card-title"><a href={`group/${item._id}`}> {item.name} </a></h5>
                 {item.description}
             </div>
         </li>
-    )
+    ) : []
 
     useEffect(()=>{    
         const getGroups = async () => {

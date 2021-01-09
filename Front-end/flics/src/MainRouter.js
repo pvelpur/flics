@@ -36,7 +36,7 @@ function MainRouter() {
                     :
                     <Login />
                 )} />
-                <Route path="/group/:id" children={<GroupDetail />}/>
+                <Route path="/group/:Groupid" children={<GroupDetail />}/>
                 
                 
             </Switch>
