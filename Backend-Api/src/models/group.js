@@ -10,10 +10,10 @@ const groupSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }],
-    reviews: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Review'
-    }],
+    // reviews: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Review'
+    // }],
     name: {
         type: String,
         trim: true,
@@ -31,6 +31,12 @@ const groupSchema = new mongoose.Schema({
 
 }, {
     timestamps: true
+})
+
+groupSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'group'
 })
 
 groupSchema.methods.appendUser = function (username) {
