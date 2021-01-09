@@ -5,6 +5,7 @@ import { setReviews } from "../reducers/reviewReducer";
 import { addReview, clearReviews } from '../actions'
 import { Link } from 'react-router-dom';
 
+
 function GroupDetail(){
     const {Groupid} = useParams();
     const [title,setTitle] = useState('')
@@ -41,11 +42,30 @@ function GroupDetail(){
         }
     }, [dispatch, Groupid])
 
+    const addToList = addition => {
+        const parameterinfo = {
+            addition:addition,
+        }
+        return fetch('http://localhost:8080/updateList', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + authToken
+            },
+            body: JSON.stringify(parameterinfo)
+        })
+        .then((res) => {
+            return res.json()
+        })
+        .catch(err => console.log(err))
+    }
+
     const items = reviews ? reviews.map((item) =>
 
         <div key={item._id} className="card" style={{marginBottom:"50px"}}>
             <h5 className="card-header">{ item.title }
-                <button className="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
+                <button onClick={() => addToList(item.title)} className="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
                 <span style={{float:"right"}}>
                     { item.rating } / 10
                 </span>
@@ -63,6 +83,7 @@ function GroupDetail(){
     ) : [];
         
 
+    
     const handleChange = inputName => event => {
         setSuccess(false)
         if(inputName === 'title'){
