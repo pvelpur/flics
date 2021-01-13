@@ -17,19 +17,6 @@ function GroupDetail(){
     const reviews = useSelector(state => state.reviews)
     const dispatch = useDispatch()
 
-    /*const reviews = [{
-        title:"game of thrones",
-        description : "it sucks",
-        rating : 2,
-        author: "swagmoney1011"
-    },
-    {
-        title:"arrow",
-        description : "its soo good",
-        rating : 9,
-        author: "swagmoney1011"
-    }]*/
-
     useEffect(()=>{    
         const getReviews = async () => {
             setIsLoading(true)
@@ -44,7 +31,15 @@ function GroupDetail(){
 
     const addToList = addition => {
         const parameterinfo = {
-            addition:addition,
+            title:addition,
+            description: null,
+            adult: null,
+            genreIDs: null,
+            poster_path: null,
+            popularity: null,
+            average_vote: null,
+            release_date: null,
+            language: null
         }
         return fetch('http://localhost:8080/updateList', {
             method: "POST",

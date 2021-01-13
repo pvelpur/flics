@@ -12,14 +12,16 @@ exports.getUserById = (req, res, next, id) => {
     })
 }
 
+
 exports.getFavoritesByUser = async(req, res) => {
     const user = await User.findById(req.userID)
     return res.json(user.favorites)
 }
 
+
 exports.appendToList = async(req, res) => {
     const user = await User.findById(req.userID)
-    user.favorites.push(req.body.addition)
+    user.favorites.push({title: req.body.title, description: null, adult: null, poster_path: null, release_date: null, genreIDs: null,  language: null, popularity: null, average_vote: null})
     try{
         await user.save()
         res.status(201).json({message: "Successfully Appended To myList, please continue"})

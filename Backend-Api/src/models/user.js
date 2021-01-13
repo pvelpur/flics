@@ -36,12 +36,23 @@ const userSchema = new mongoose.Schema({
     favMovie: {
         type: String
     },
-    favorites: [{type: String}]
+    favorites: [{
+        title: String,
+        description: String,
+        adult: Boolean,
+        poster_path: String,
+        release_date: String,
+        genreIDs: Array,
+        language: String,
+        popularity: Number,
+        average_vote: Number
+    }]
 }, {
     timestamps: true
 })
 
 //Virtual Property -> relationship btwn 2 entities
+
 userSchema.virtual('reviews', {
     ref: 'Review',
     localField: '_id',
