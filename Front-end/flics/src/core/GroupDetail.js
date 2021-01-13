@@ -13,6 +13,7 @@ function GroupDetail(){
     const [rating,setRating] = useState(1)
     const [loading, setIsLoading] = useState(false)
     const [successModal,setSuccess] = useState(false)
+    const [mediaType, setMediaType] = useState('Movie')
     const authToken = useSelector(state => state.auth.authToken)
     const reviews = useSelector(state => state.reviews)
     const dispatch = useDispatch()
@@ -100,10 +101,11 @@ function GroupDetail(){
     const handleSubmit = event => {
         event.preventDefault() //stop default behavior of reloading page
         const reviewinfo = {
-            title:title,
-            description:description,
-            rating:rating,
-            group: Groupid
+            title,
+            description,
+            rating,
+            group: Groupid,
+            mediaType
         }
         createReview(reviewinfo)
         .then(data => {
@@ -163,7 +165,6 @@ function GroupDetail(){
                         </div>
                         <div className="modal-body">
 
-
                         {successModal ?
                             <div className="text-center">
                                 Successfully created review!
@@ -179,7 +180,16 @@ function GroupDetail(){
                             <div className="form-group">
                                 <label htmlFor="rating">Rating (between 1 and 10):</label>
                                 <input onChange={handleChange("rating")} value={rating} type="number" id="rating" name="rating" min="1" max="10"/>
-                            </div>    
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" defaultChecked onChange={() => setMediaType('Movie')}/>
+                                <label className="form-check-label" htmlFor="inlineRadio1">Movie</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onChange={() => {setMediaType('TV-Show')}}/>
+                                <label className="form-check-label" htmlFor="inlineRadio2">TV-Show</label>
+                            </div>
+
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={()=> {setTitle('');setDescription('');setRating(1);setSuccess(false) }} data-dismiss="modal">Close</button>
