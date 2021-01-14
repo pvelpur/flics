@@ -29,8 +29,13 @@ exports.appendToList = async(req, res) => {
     .catch(err => {
         res.status(400).json({error: err.message})
     })
-    console.log(topMatch)
-    user.favorites.push({title: topMatch.name, description: topMatch.overview, poster_path: topMatch.poster_path, release_date: topMatch.release_date, genreIDs: topMatch.genre_ids,  language: topMatch.original_language, vote_average: topMatch.vote_average})
+    //console.log(topMatch)
+    if(topMatch.name && topMatch.first_air_date) {
+        user.favorites.push({title: topMatch.name, description: topMatch.overview, poster_path: topMatch.poster_path, release_date: topMatch.first_air_date, genreIDs: topMatch.genre_ids,  language: topMatch.original_language, vote_average: topMatch.vote_average})
+    }
+    else {
+        user.favorites.push({title: topMatch.title, description: topMatch.overview, poster_path: topMatch.poster_path, release_date: topMatch.release_date, genreIDs: topMatch.genre_ids,  language: topMatch.original_language, vote_average: topMatch.vote_average})
+    }
     await user.save()
     res.status(201).json({message: "Successfully Appended To myList, please continue"})
 
