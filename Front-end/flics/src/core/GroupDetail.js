@@ -30,10 +30,10 @@ function GroupDetail(){
         }
     }, [dispatch, Groupid])
 
-    const addToList = addition => {
+    const addToList = (title, mediaType) => {
         const parameterinfo = {
-            title:addition,
-            mediaType:mediaType
+            title,
+            mediaType
         }
         return fetch('http://localhost:8080/updateList', {
             method: "POST",
@@ -54,7 +54,7 @@ function GroupDetail(){
 
         <div key={item._id} className="card" style={{marginBottom:"50px"}}>
             <h5 className="card-header">{ item.title }
-                <button onClick={() => addToList(item.title)} className="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
+                <button onClick={() => addToList(item.title, item.mediaType)} className="btn btn-secondary btn-sm mt-1 mb-1">Add to My List</button>
                 <span style={{float:"right"}}>
                     { item.rating } / 10
                 </span>
