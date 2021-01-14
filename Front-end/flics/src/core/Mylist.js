@@ -8,7 +8,7 @@ function Mylist(){
 
     const items = favorites.map((item, index) =>
         <li key={index} className="list-group-item justify-content-between">
-            {item}
+            {item.title}
         </li>
     )
 
