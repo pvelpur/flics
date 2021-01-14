@@ -13,7 +13,7 @@ function GroupDetail(){
     const [rating,setRating] = useState(1)
     const [loading, setIsLoading] = useState(false)
     const [successModal,setSuccess] = useState(false)
-    const [mediaType, setMediaType] = useState('Movie')
+    const [mediaType, setMediaType] = useState('movie')
     const authToken = useSelector(state => state.auth.authToken)
     const reviews = useSelector(state => state.reviews)
     const dispatch = useDispatch()
@@ -33,14 +33,7 @@ function GroupDetail(){
     const addToList = addition => {
         const parameterinfo = {
             title:addition,
-            description: null,
-            adult: null,
-            genreIDs: null,
-            poster_path: null,
-            popularity: null,
-            average_vote: null,
-            release_date: null,
-            language: null
+            mediaType:mediaType
         }
         return fetch('http://localhost:8080/updateList', {
             method: "POST",
@@ -177,11 +170,11 @@ function GroupDetail(){
                                 <input onChange={handleChange("rating")} value={rating} type="number" id="rating" name="rating" min="1" max="10"/>
                             </div>
                             <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" defaultChecked onChange={() => setMediaType('Movie')}/>
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" defaultChecked onChange={() => setMediaType('movie')}/>
                                 <label className="form-check-label" htmlFor="inlineRadio1">Movie</label>
                             </div>
                             <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onChange={() => {setMediaType('TV-Show')}}/>
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onChange={() => {setMediaType('tv')}}/>
                                 <label className="form-check-label" htmlFor="inlineRadio2">TV-Show</label>
                             </div>
 

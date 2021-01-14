@@ -39,13 +39,11 @@ const userSchema = new mongoose.Schema({
     favorites: [{
         title: String,
         description: String,
-        adult: Boolean,
         poster_path: String,
         release_date: String,
         genreIDs: Array,
         language: String,
-        popularity: Number,
-        average_vote: Number
+        vote_average: Number
     }]
 }, {
     timestamps: true
