@@ -23,7 +23,7 @@ exports.getFavoritesByUser = async(req, res) => {
 exports.appendToList = async(req, res) => {
     const user = await User.findById(req.userID)
     var topMatch
-    await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${process.env.API_KEY}&language=en-US&query=${req.body.title}&page=1`).then(res => res.json()).then(res => {
+    await fetch(`https://api.themoviedb.org/3/search/${req.body.mediaType}?api_key=${process.env.API_KEY}&language=en-US&query=${req.body.title}&page=1`).then(res => res.json()).then(res => {
         topMatch = res.results[0]
     })
     .catch(err => {
