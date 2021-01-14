@@ -8,7 +8,10 @@ function Mylist(){
 
     const items = favorites.map((item, index) =>
         <li key={index} className="list-group-item justify-content-between">
-            {item.title}
+            <div className="card-body">
+                <h5 className="card-title">{item.title}</h5>
+                <p>{item.description}</p>
+            </div>
         </li>
     )
 
@@ -29,9 +32,11 @@ function Mylist(){
 
     return (
         <div className='container'>
-            <ul className="list-group">
-            {items}
-            </ul>
+            <div className="card" style={{marginBottom: "50px"}}>
+                <ul className="list-group">
+                    {items}  
+                </ul>
+            </div>
         </div>
     )
 }
