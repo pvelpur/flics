@@ -1,6 +1,9 @@
 {
   "name": "flics",
   "version": "1.0.0",
+  "engines": {
+    "yarn": "1.22.10"
+  },
   "description": "Application to share movie/TV show recommendations with your friends",
   "main": "index.js",
   "scripts": {
