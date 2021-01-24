@@ -17,6 +17,10 @@ app.use(express.json())
 app.use(cors())
 app.use(cookieParser())
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('../../Front-end/build'))
+}
+
 app.use('/', authRouter)
 app.use('/', reviewRouter)
 app.use('/', groupRouter)

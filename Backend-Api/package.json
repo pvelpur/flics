@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
-    "start": "node src/index.js"
+    "build": "cd ../Front-end && yarn build",
+    "install-client": "cd ../Front-end && yarn install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node src/index.js",
+    "client": "cd ../Front-end && yarn start"
   },
   "author": "",
   "license": "ISC",
