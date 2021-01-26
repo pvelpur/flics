@@ -1,4 +1,5 @@
 import {setMedia} from '../actions'
+import axios from 'axios'
 
 const initialState = []
 
