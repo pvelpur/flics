@@ -68,7 +68,7 @@ function Mygroups(){
 
     
     const createGroup = groupinfo => {
-        return fetch('http://localhost:8080/group', {
+        return fetch('/api/group', {
             method: "POST",
             headers: {
                 Accept: "application/json",

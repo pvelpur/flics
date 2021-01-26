@@ -18,7 +18,7 @@ export const groupReducer = (state = initialState, action) => {
 // A Thunk (redux-thunk)
 export const loadGroups = () => async (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    const groups = await fetch('http://localhost:8080/groups', {
+    const groups = await fetch('/api/groups', {
         method: "GET",
         headers: {
             Authorization: "Bearer " + authToken

@@ -35,7 +35,7 @@ function GroupDetail(){
             title,
             mediaType
         }
-        return fetch('http://localhost:8080/updateList', {
+        return fetch('/api/updateList', {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -110,7 +110,7 @@ function GroupDetail(){
     }
 
     const createReview = reviewinfo => {
-        return fetch('http://localhost:8080/review', {
+        return fetch('/api/review', {
             method: "POST",
             headers: {
                 Accept: "application/json",

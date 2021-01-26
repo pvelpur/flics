@@ -18,7 +18,7 @@ export const reviewReducer = (state = initialState, action) => {
 // A Thunk (redux-thunk)
 export const setReviews = (groupid) => async (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    const reviews = await fetch(`http://localhost:8080/reviews/${groupid}`, {
+    const reviews = await fetch(`/api/reviews/${groupid}`, {
         method: "GET",
         headers: {
             Authorization: "Bearer " + authToken

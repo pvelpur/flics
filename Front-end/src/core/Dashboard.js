@@ -15,7 +15,7 @@ function Dashboard() {
         dispatch(signoutAction())
         dispatch(clearGroups())
         next() //redirect the user
-        return fetch("http://localhost:8080/signout", {
+        return fetch("/api/signout", {
             method: "GET"
         })
         .then((res) => {

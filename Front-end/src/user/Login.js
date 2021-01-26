@@ -47,7 +47,7 @@ function Login() {
     }
 
     const login = user => {
-        return fetch('http://localhost:8080/login', {
+        return fetch('/api/login', {
             method: "POST",
             headers: {
                 Accept: "application/json",

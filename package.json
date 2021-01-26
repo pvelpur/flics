@@ -2,21 +2,23 @@
   "name": "flics",
   "version": "1.0.0",
   "engines": {
-    "yarn": "1.22.10"
+    "yarn": "1.22.5"
   },
   "description": "Application to share movie/TV show recommendations with your friends",
   "main": "index.js",
   "scripts": {
-    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js",
-    "build": "cd Front-end && yarn build",
-    "install-client": "cd Front-end && yarn install",
-    "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node src/index.js",
-    "client": "cd ../Front-end && yarn start"
+    "build": "cd Front-end && yarn build",
+    "install-client": "cd Front-end && yarn install && yarn install --only=dev --no-shrinkwrap",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "client": "cd Front-end && yarn start",
+    "server": "env-cmd -f ./config/dev.env nodemon src/index.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
-  "author": "",
+  "author": "Prithvi Velpuri",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   },
   "dependencies": {

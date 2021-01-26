@@ -10,9 +10,9 @@ const router = express.Router()
 //READ -> GET
 //UPDATE -> PATCH/PUT
 //DELTE -> DELETE
-router.post('/group', RequireAuth, createGroup) //need to be authenticated to create a review
+router.post('/api/group', RequireAuth, createGroup) //need to be authenticated to create a review
 //When it performs authentications, it will add userID to 'req' (check middleware/auth.js)
-router.get('/groups', RequireAuth, getGroups) //need to be authenticated to see groups
+router.get('/api/groups', RequireAuth, getGroups) //need to be authenticated to see groups
 
 // Any route containing :userId, the app will first execute getUserById() method
 router.param("userId", getUserById)

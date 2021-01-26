@@ -52,7 +52,7 @@ function Signup() {
     }
 
     const signup = user => {
-        return fetch('http://localhost:8080/signup', {
+        return fetch('/api/signup', {
             method: "POST",
             headers: {
                 Accept: "application/json",
