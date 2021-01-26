@@ -21,6 +21,7 @@ export const loadMedia = () => async (dispatch, getState) => {
     const list = await fetch('/api/favorites', {
         method: "GET",
         headers: {
+            'Accept': 'application/json',
             Authorization: "Bearer " + authToken
         },
     }).then(res => res.json())

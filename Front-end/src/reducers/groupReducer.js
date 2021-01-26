@@ -21,6 +21,7 @@ export const loadGroups = () => async (dispatch, getState) => {
     const groups = await fetch('/api/groups', {
         method: "GET",
         headers: {
+            'Accept': 'application/json',
             Authorization: "Bearer " + authToken
         },
     }).then(res => res.json())
