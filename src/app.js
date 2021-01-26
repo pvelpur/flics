@@ -20,11 +20,11 @@ app.use(cookieParser())
 
 if (process.env.NODE_ENV === 'production') {
     //serve static files
-    app.use(express.static(path.join(__dirname, 'Front-end/build')))
+    app.use(express.static(path.join(__dirname, '..', 'Front-end/build')))
 
     //handle React routing, return all requests to React app
     app.get('*', function(req, res) {
-        res.sendFile(path.join(__dirname, 'Front-end/build', 'index.html'));
+        res.sendFile(path.join(__dirname, '..', 'Front-end/build', 'index.html'));
     })
 }
 
