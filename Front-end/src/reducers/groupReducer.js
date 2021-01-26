@@ -32,7 +32,6 @@ export const loadGroups = () => async (dispatch, getState) => {
             'Authorization': 'Bearer ' + authToken
         }
     }
-    const groupsData = await axios.get('/api/groups', options)
-    const groups = groupsData.json()
-    dispatch(setGroups(groups))
+    const groups = await axios.get('/api/groups', options)
+    dispatch(setGroups(groups.data))
 }

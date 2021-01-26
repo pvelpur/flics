@@ -32,7 +32,6 @@ export const loadMedia = () => async (dispatch, getState) => {
             'Authorization': 'Bearer ' + authToken
         }
     }
-    const listData = await axios.get('/api/favorites', options)
-    const list = listData.json()
-    dispatch(setMedia(list))
+    const list = await axios.get('/api/favorites', options)
+    dispatch(setMedia(list.data))
 }
