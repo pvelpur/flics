@@ -18,7 +18,7 @@ export const myListReducer = (state = initialState, action) => {
 // A Thunk (redux-thunk)
 export const loadMedia = () => async (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    const list = await fetch('/api/favorites', {
+    const list = await fetch('http://localhost:8080/api/favorites', {
         method: "GET",
         headers: {
             "Accept": "application/json",
