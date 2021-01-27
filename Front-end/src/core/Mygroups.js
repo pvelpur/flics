@@ -1,35 +1,35 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {useSelector, useDispatch} from 'react-redux'
-//import {loadGroups} from '../reducers/groupReducer'
+import {loadGroups} from '../reducers/groupReducer'
 import {addGroup} from '../actions'
 
 function Mygroups(){
     const [groupname,setGroupName] = useState('')
     const [description,setDescription] = useState('')
     const authToken = useSelector(state => state.auth.authToken)
-    // groups = useSelector(state => state.groups)
+    groups = useSelector(state => state.groups)
     const [successModal,setSuccess] = useState(false)
     const [loading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
     
-    const groups = [{id:"1",name:"Silicon Valley Boys",description:"We make the dough"},{id:"2",name:"Anime Enthusiasts",description:"For people who want good anime recommendations"}]
-    // const items = !groups.error ? groups.map((item) =>
-    //     <li key={item._id} className="list-group-item justify-content-between">
-    //         <div className="card-body">
-    //             <h5 className="card-title"><a href={`group/${item._id}`}> {item.name} </a></h5>
-    //             {item.description}
-    //         </div>
-    //     </li>
-    // ) : []
+    //const groups = [{id:"1",name:"Silicon Valley Boys",description:"We make the dough"},{id:"2",name:"Anime Enthusiasts",description:"For people who want good anime recommendations"}]
+    const items = !groups.error ? groups.map((item) =>
+        <li key={item._id} className="list-group-item justify-content-between">
+            <div className="card-body">
+                <h5 className="card-title"><a href={`group/${item._id}`}> {item.name} </a></h5>
+                {item.description}
+            </div>
+        </li>
+    ) : []
 
-    // useEffect(()=>{    
-    //     const getGroups = async () => {
-    //         setIsLoading(true)
-    //         await dispatch(loadGroups())
-    //         setIsLoading(false)
-    //     };
-    //     getGroups()
-    // }, [dispatch])
+    useEffect(()=>{    
+        const getGroups = async () => {
+            setIsLoading(true)
+            await dispatch(loadGroups())
+            setIsLoading(false)
+        };
+        getGroups()
+    }, [dispatch])
 
     const handleChange = inputName => event => {
         setSuccess(false)
@@ -56,8 +56,8 @@ function Mygroups(){
                 const group = {
                         name: data.group.name, 
                         description: data.group.description, 
-                        //usernames: data.group.usernames, 
-                        //_id: data.group._id
+                        usernames: data.group.usernames, 
+                        _id: data.group._id
                     }
                 dispatch(addGroup(group))
                 setSuccess(true)
