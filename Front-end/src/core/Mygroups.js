@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import {useSelector, useDispatch} from 'react-redux'
-import {loadGroups} from '../reducers/groupReducer'
+//import {loadGroups} from '../reducers/groupReducer'
 import {addGroup} from '../actions'
 
 function Mygroups(){
@@ -22,14 +22,14 @@ function Mygroups(){
     //     </li>
     // ) : []
 
-    useEffect(()=>{    
-        const getGroups = async () => {
-            setIsLoading(true)
-            await dispatch(loadGroups())
-            setIsLoading(false)
-        };
-        getGroups()
-    }, [dispatch])
+    // useEffect(()=>{    
+    //     const getGroups = async () => {
+    //         setIsLoading(true)
+    //         await dispatch(loadGroups())
+    //         setIsLoading(false)
+    //     };
+    //     getGroups()
+    // }, [dispatch])
 
     const handleChange = inputName => event => {
         setSuccess(false)
@@ -56,8 +56,8 @@ function Mygroups(){
                 const group = {
                         name: data.group.name, 
                         description: data.group.description, 
-                        usernames: data.group.usernames, 
-                        _id: data.group._id
+                        //usernames: data.group.usernames, 
+                        //_id: data.group._id
                     }
                 dispatch(addGroup(group))
                 setSuccess(true)
