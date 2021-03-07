@@ -30,6 +30,10 @@ export const loadGroups = () => async (dispatch, getState) => {
         headers: {
             'Accept' : 'application/json',
             'Authorization': 'Bearer ' + authToken
+        },
+        proxy: {
+            host: 'http://localhost',
+            port: 8080
         }
     }
     const groups = await axios.get('/api/groups', options)
