@@ -19,19 +19,20 @@ export const groupReducer = (state = initialState, action) => {
 // A Thunk (redux-thunk)
 export const loadGroups = () => async (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    fetch('/api/groups', {
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            Authorization: "Bearer " + authToken
-        },
-    }).then(res => {dispatch(setGroups(res.json()))})
-    // const options = {
+    // fetch('http://localhost:8080/api/groups', {
+    //     method: "GET",
     //     headers: {
-    //         'Accept' : 'application/json',
-    //         'Authorization': 'Bearer ' + authToken
-    //     }
-    // }
-    // const groups = await axios.get('/api/groups', options)
+    //         "Accept": "application/json",
+    //         Authorization: "Bearer " + authToken
+    //     },
+    // }).then(res => {dispatch(setGroups(res.json()))})
+    const options = {
+        headers: {
+            'Accept' : 'application/json',
+            'Authorization': 'Bearer ' + authToken
+        }
+    }
+    const groups = await axios.get('/api/groups', options)
+    dispatch(setGroups(groups.data))
     
 }
